@@ -1,15 +1,17 @@
-import { createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
 
 // ACTION --> any action you want to do. A function that returns a simple object
-const increment = () => {
+const increment = (num) => {
   return {
     type: "INCREMENT",
+    payload: num,
   };
 };
 
-const decrement = () => {
+const decrement = (num) => {
   return {
     type: "DECREMENT",
+    payload: num,
   };
 };
 
@@ -18,10 +20,10 @@ const decrement = () => {
 const counter = (state = 0, action) => {
   switch (action.type) {
     case "INCREMENT":
-      return state + 1;
+      return state + action.payload;
 
     case "DECREMENT":
-      return state - 1;
+      return state - action.payload;
 
     default:
       return state;
@@ -30,7 +32,7 @@ const counter = (state = 0, action) => {
 
 // STORE --> Globalized State
 
-let store = createStore(counter);
+let store = configureStore(counter);
 
 // display it in the console
 store.subscribe(() => console.log(store.getState()));
