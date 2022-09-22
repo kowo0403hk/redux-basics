@@ -24,7 +24,7 @@ const counter = (state = 0, action) => {
       return state - 1;
 
     default:
-      return;
+      return state;
   }
 };
 
